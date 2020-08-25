@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Testing Service Worker</title>
+</head>
+<body>
+  <h1>Hi! I'm a page with service worker</h1>
+  
+  <section>
+    <h3>Here will happen the magic</h3>
+    <button onclick="onFetchApple()">Get an apple</button>
+    <button onclick="onFetchIceCream()">Get an ice cream</button>
+    <button onclick="onFetchChocolateIceCream()">Get an chocolate ice cream</button>
+    <div id="images-gallery">
+
+    </div>
+  </section>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+
+    function appendImageToGallery (imagePath) {
+      const imagesGallery = document.getElementById('images-gallery');
+      const imageToInsert = document.createElement('img');
+      imageToInsert.src = imagePath;
+      imagesGallery.appendChild(imageToInsert);
+    }
+
+    function onFetchApple () {
+      appendImageToGallery('/images/apple.svg');
+    }
+
+    function onFetchIceCream () {
+      appendImageToGallery('/images/ice-cream.svg');
+    }
+
+    function onFetchChocolateIceCream () {
+      appendImageToGallery('/images/ice-cream-chocolate.svg');
+    }
+  </script>
+</body>
+</html>
